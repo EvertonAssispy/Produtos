@@ -1,0 +1,32 @@
+
+.dashboard{
+
+    max-height: 200px;
+    padding: 15px;
+    background-color: transparent;
+ 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgba(0, 0, 0, 0.733);
+    bottom: 0;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    background-color: inherit;
+}
+
+.semprodutos{
+    
+    color: rgba(0, 0, 0, 0.733);
+}
+
+.dashboard h1{
+   
+    padding-bottom: 10px;
+}
+
+
+@media (max-width: 950px) {
+  .dashboard{
+    display: none;
+  }
+}

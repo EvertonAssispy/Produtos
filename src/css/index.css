@@ -1,0 +1,158 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    max-height: 100vh;
+    
+}
+
+#root {
+  
+  min-height: 100vh;
+  background-color: rgb(110, 110, 110);
+}
+
+.container {
+    padding: 50px 10px 10px 10px;
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+    transition: all 0.5s ease;
+    flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
+    
+}
+
+.table {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+@media (max-width: 950px) {
+    .container {
+        flex-direction: column;
+        gap: 1px;
+        justify-content: flex-start;
+        padding-top: 30px;
+        align-items: center; /* Garante a centralização no eixo principal */
+    }
+
+    .table {
+        height: 160px;
+        padding: 12px;
+        font-size: 0.9rem;
+        transform: translateY(5px);
+        opacity: 0.95;
+        transition: all 0.4s ease;
+        width: 100%; /* Garante que a .table ocupe 100% do seu contêiner */
+        max-width: 350px; /* Define uma largura máxima */
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 16px;
+        gap: 12px;
+        width: 100%; /* Garante que ocupa 100% da largura da tela */
+        max-width: 320px; /* Máxima largura para manter harmonia */
+        margin: 0 auto; /* Centraliza a div de inputs */
+        background-color: #1e1e1e;
+        color: white;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    .inputs input,
+    .inputs select {
+        font-size: 0.85rem;
+        padding: 6px 8px;
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: border-color 0.2s;
+    }
+
+    .inputs input:focus,
+    .inputs select:focus {
+        border-color: #3f51b5;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.1);
+    }
+
+    .inputs button {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+        width: 100%;
+        border: none;
+        border-radius: 6px;
+        background-color: #3f51b5;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .inputs button:hover {
+        background-color: #303f9f;
+    }
+
+    .semprodutos{
+      padding-top: 30px;
+      text-align: center;
+
+    }
+}
+/* Contêiner da tabela */
+.table-container {
+  min-height: 400px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  overflow: hidden; /* Garante que o conteúdo extra não ultrapasse o limite */
+}
+
+/* Caixa de histórico - controla o tamanho do histórico expandido */
+.history-box {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  max-height: 300px; /* Limita a altura máxima do histórico */
+  overflow-y: auto; /* Permite rolagem dentro da caixa se o conteúdo ultrapassar a altura máxima */
+}
+
+/* Estilo de cada linha da tabela */
+.table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Controla a expansão do histórico */
+.collapse-row {
+  max-height: 0; /* Começa com a altura zero */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out; /* Animação de expansão */
+}
+
+.collapse-row.open {
+  max-height: 300px;  /* Ajuste quando a linha está aberta */
+}
+
+/* Outras melhorias (exemplo para media query) */
+@media (max-width: 950px) {
+  .table-container {
+    padding: 8px;  /* Ajuste de espaçamento em telas menores */
+  }
+
+  .history-box {
+    padding: 12px;  /* Ajuste de padding em telas menores */
+  }
+}
+
+
