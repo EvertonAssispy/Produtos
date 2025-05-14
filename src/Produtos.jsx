@@ -6,7 +6,6 @@ import {
   GetCategories,
   GetProducts,
   PostProduts,
-  GetCount,
 } from "./services/produtoServices";
 import { createContext } from "react";
 import { ProdutosContext } from "./Context/produtoContext";
@@ -24,27 +23,38 @@ function Produtos() {
   const [nomeProduto, setnomeProduto] = useState();
   const [precoProduto, setprecoProduto] = useState();
   const [qntproduto, setqntProduto] = useState();
-  const [Count, setCount] = useState();
+  const [Count, setCount] = useState([]);
+ 
 
   useEffect(() => {
+    
+    GetProducts(Page)
+      .then((data) =>{ setProdutos(data.items);
+        return data
+      })
+      .then((data)=> setCount(data.count))
+      .catch((erro) => console.error(erro));
+
+  }, [enviando, Page]);
+
+  useEffect(()=>{
+    
     GetCategories()
       .then((data) => setCategoria(data))
       .catch((erro) => console.error(erro));
 
-    GetCount()
-      .then((data) => setCount(data))
-      .catch((erro) => console.error(erro));
-
-    GetProducts(Page)
-      .then((data) => setProdutos(data))
-      .catch((erro) => console.error(erro));
-  }, [enviando, Page]);
-
+  },[enviando])
+  
+  
+  
   const pageChange = (event, value) => {
     setPage(value);
     GetProducts(value);
   };
-
+  
+  
+  
+ 
   const enviar = async () => {
     if (
       !nomeProduto ||
@@ -77,6 +87,10 @@ function Produtos() {
       seterro("Erro ao cadastrar o produto.");
     }
   };
+ 
+
+
+
 
 
 
@@ -91,7 +105,7 @@ function Produtos() {
             setprecoProduto={setprecoProduto}
             setqntProduto={setqntProduto}
           />
-          {Produtos.length === 0 ?
+          {(Count === 0 ) ?
 
             <div className="semprodutos">
               <h1>Nao há produtos</h1>
@@ -103,7 +117,7 @@ function Produtos() {
 
 
 
-            <div class="table">
+            <div className="table">
               <CollapsibleTable
                 produtos={Produtos}
                 Count={Count}
@@ -114,10 +128,10 @@ function Produtos() {
         </ProdutosContext.Provider>
         <div className="dashboard">
 
-          {Produtos.length >= 1 ? <h1>Dados importantes:</h1> : ``}
+          {(Produtos.length >= 1 &&  Count<4) ? <h1>Dados importantes:</h1> : ``}
 
           {Categoria.map((categoria) => (
-            <h2 className="NomeCategoria">
+            <h2 key={categoria.id} className="NomeCategoria">
               {(Produtos.length >= 1 && categoria.Porcentagem > 0) ? `${categoria.Categoria}:` : ``}  {(Produtos.length >= 1 && categoria.Porcentagem > 0) ? `${categoria.Porcentagem}%` : ``}
             </h2>
           ))}

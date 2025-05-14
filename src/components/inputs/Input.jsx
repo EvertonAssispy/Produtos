@@ -46,7 +46,7 @@ export default function Input({ setnomeProduto, setprecoProduto, setqntProduto, 
         }
     }
 
-    console.log(Valor)
+   
 
 
     return (
@@ -65,7 +65,7 @@ export default function Input({ setnomeProduto, setprecoProduto, setqntProduto, 
             </div>}
 
             {Categoria.length === 0 &&
-                <div class="inputs categoria">
+                <div className="inputs categoria">
                     <label>Nome da Categoria:</label>
                     <input type="text" placeholder="nome da categoria" onChange={(e) => setCAT(e.target.value)}></input>
                     <button className='Cadastro' onClick={enviarCategoria}>Criar Categoria</button>

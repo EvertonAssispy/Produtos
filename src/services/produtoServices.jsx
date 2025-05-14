@@ -4,16 +4,11 @@ import axios from "axios"
 export async function GetProducts(pages){
     const response = await axios.get(`http://127.0.0.1:8080/produtos/v1/produtos/?page=${pages}`)
 
-    return response.data.items
+    return response.data
     
 }
 
-export async function GetCount(){
-    const response = await axios.get(`http://127.0.0.1:8080/produtos/v1/produtos/`)
-    
-    return response.data.count
-    
-}
+
 
 export async function GetCategories(){
     const response = await axios.get(`http://127.0.0.1:8080/produtos/v1/produtos/categoria/`)
