@@ -1,16 +1,16 @@
-import Input from "./components/inputs/Input";
-import CollapsibleTable from "./components/Tableproducts";
+import Input from "../components/inputs/Input";
+import CollapsibleTable from "../components/Tableproducts";
 import { useEffect, useState, useContext } from "react";
 import {
   DeleteProducts,
   GetCategories,
   GetProducts,
   PostProduts,
-} from "./services/produtoServices";
+} from "../services/produtoServices";
 import { createContext } from "react";
-import { ProdutosContext } from "./Context/produtoContext";
-import "./components/css/dashboard.css";
-import "./css/index.css";
+import { ProdutosContext } from "../Context/produtoContext";
+// import "../components/css/dashboard";
+import "../css/index.css";
 
 function Produtos() {
   const [enviando, setEnviando] = useState(0);
@@ -24,37 +24,38 @@ function Produtos() {
   const [precoProduto, setprecoProduto] = useState();
   const [qntproduto, setqntProduto] = useState();
   const [Count, setCount] = useState([]);
- 
+
 
   useEffect(() => {
-    
+
     GetProducts(Page)
-      .then((data) =>{ setProdutos(data.items);
+      .then((data) => {
+        setProdutos(data.items);
         return data
       })
-      .then((data)=> setCount(data.count))
+      .then((data) => setCount(data.count))
       .catch((erro) => console.error(erro));
 
   }, [enviando, Page]);
 
-  useEffect(()=>{
-    
+  useEffect(() => {
+
     GetCategories()
       .then((data) => setCategoria(data))
       .catch((erro) => console.error(erro));
 
-  },[enviando])
-  
-  
-  
+  }, [enviando])
+
+
+
   const pageChange = (event, value) => {
     setPage(value);
     GetProducts(value);
   };
-  
-  
-  
- 
+
+
+
+
   const enviar = async () => {
     if (
       !nomeProduto ||
@@ -87,7 +88,7 @@ function Produtos() {
       seterro("Erro ao cadastrar o produto.");
     }
   };
- 
+
 
 
 
@@ -105,7 +106,7 @@ function Produtos() {
             setprecoProduto={setprecoProduto}
             setqntProduto={setqntProduto}
           />
-          {(Count === 0 ) ?
+          {(Count === 0) ?
 
             <div className="semprodutos">
               <h1>Nao há produtos</h1>
@@ -128,7 +129,7 @@ function Produtos() {
         </ProdutosContext.Provider>
         <div className="dashboard">
 
-          {(Produtos.length >= 1 &&  Count<4) ? <h1>Dados importantes:</h1> : ``}
+          {(Produtos.length >= 1 && Count < 4) ? <h1>Dados importantes:</h1> : ``}
 
           {Categoria.map((categoria) => (
             <h2 key={categoria.id} className="NomeCategoria">
