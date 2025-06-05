@@ -9,7 +9,7 @@
 #root {
   
   min-height: 100vh;
-  background-color: rgb(110, 110, 110);
+  /* background-color: rgb(110, 110, 110); */
 }
 
 .container {
@@ -27,7 +27,17 @@
 
 .table {
     transition: transform 0.5s ease, opacity 0.5s ease;
+    width:850px;
 }
+
+@media (max-width: 1600px) {
+
+  .table {
+    transition: all 0.5s ease;
+    width:auto;
+  }
+}
+
 
 @media (max-width: 950px) {
     .container {
@@ -156,3 +166,11 @@
 }
 
 
+
+
+
+
+
+.css-c0ubff-MuiDrawer-docked{
+  background-color: blue;
+}

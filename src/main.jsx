@@ -6,6 +6,9 @@ import Produtos from './Pages/Produtos'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Estoque from './components/Estoque-components/Estoque'
 import Layout from './Layout'
+import Dashboard from './Pages/Dashboard-visao'
+import Relatorio from './Pages/dashboard-relatorios'
+import Historico from './Pages/Historico'
 
 
 const router = createBrowserRouter([
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
       {   
         path: 'estoque',
         element: <Estoque />
+      },
+      {
+        path:'dashboard/visao',
+        element:<Dashboard/>
+      },
+      {
+        path:'dashboard/relatorios',
+        element: <Relatorio/>
+      },
+      {
+        path: 'historico',
+        element: <Historico/>
       }
     ]
   }

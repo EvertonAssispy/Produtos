@@ -127,18 +127,7 @@ function Produtos() {
             </div>
           }
         </ProdutosContext.Provider>
-        <div className="dashboard">
-
-          {(Produtos.length >= 1 && Count < 4) ? <h1>Dados importantes:</h1> : ``}
-
-          {Categoria.map((categoria) => (
-            <h2 key={categoria.id} className="NomeCategoria">
-              {(Produtos.length >= 1 && categoria.Porcentagem > 0) ? `${categoria.Categoria}:` : ``}  {(Produtos.length >= 1 && categoria.Porcentagem > 0) ? `${categoria.Porcentagem}%` : ``}
-            </h2>
-          ))}
-
-
-        </div>
+        
       </div>
     </div>
   );

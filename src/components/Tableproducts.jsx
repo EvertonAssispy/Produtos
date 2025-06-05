@@ -127,7 +127,11 @@ export default function CollapsibleTable({ produtos, Count, pageChange }) {
         })
 
 
-        : [];
+    : [];
+
+
+    const infoPerPage = 5
+    const TotalPages = Math.ceil(Count / infoPerPage)
 
 
     return (
@@ -150,7 +154,7 @@ export default function CollapsibleTable({ produtos, Count, pageChange }) {
                     </TableBody>
                 </Table>
                 <Box sx={{ display: 'flex', justifyContent: 'center', padding: 2 }}>
-                    <PaginationRounded Count={Count} handlePageChange={pageChange} />
+                    <PaginationRounded Count={TotalPages} handlePageChange={pageChange} infoPerPage={5} />
                 </Box>
             </TableContainer>
         </Box>
