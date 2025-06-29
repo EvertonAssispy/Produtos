@@ -27,8 +27,8 @@ function confirmarEDeletar() {
 }
 
 export default function AccessibleTable({ vendas, count, handlepages }) {
-  function createData(name, qnt, price, valoruni, data) {
-    return { name, qnt, price, valoruni, data };
+  function createData(name, qnt, price, valoruni, data, hora) {
+    return { name, qnt, price, valoruni, data, hora };
   }
 
   const rows = Array.isArray(vendas)
@@ -36,12 +36,17 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
         const dataformatada = new Date(item.Venda_em).toLocaleDateString(
           "pt-BR"
         );
+
+        const horaformatada = new Date(item.Venda_em).toLocaleTimeString(
+        "pt-BR"
+        )
         return createData(
           item.produto_Vendido,
           item.Quantidade,
           item.Valor_da_venda,
           item.Valor_uni,
-          dataformatada
+          dataformatada,
+          horaformatada
         );
       })
     : []; // OU
@@ -74,10 +79,13 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
               <strong>Preco uni.</strong>
             </TableCell>
             <TableCell align="right">
-              <strong>Venda</strong>
+              <strong>Valor</strong>
             </TableCell>
             <TableCell align="right">
               <strong>Data da Venda</strong>
+            </TableCell>
+            <TableCell align="right">
+              <strong>Horas</strong>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -91,6 +99,7 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
               <TableCell align="right">{row.valoruni}</TableCell>
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.data}</TableCell>
+              <TableCell align="right">{row.hora}</TableCell>
             </TableRow>
           ))}
         </TableBody>

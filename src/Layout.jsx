@@ -12,134 +12,147 @@ import {
   ListItemIcon,
   Divider,
   Collapse,
+  IconButton,
+  useMediaQuery,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import StoreIcon from "@mui/icons-material/Store";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import HistoryToggleOffIcon from "@mui/icons-material/HistoryToggleOff";
-import "./css/index.css";
-import { useState } from "react";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { useState } from "react";
+import "./css/index.css";
 
 const drawerWidth = 240;
 
 export default function SidebarLayout() {
-  const [openDashboard, setopenDashboard] = useState(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));  // true se for celular
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDashboard, setOpenDashboard] = useState(true);
 
-  const handleopenDashboard = () => {
-    setopenDashboard(!openDashboard);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
+
+  const handleOpenDashboard = () => {
+    setOpenDashboard(!openDashboard);
+  };
+
+  const drawerContent = (
+    <div>
+      <Toolbar />
+      <List>
+        <ListItem button component={Link} to="/produtos" onClick={() => setMobileOpen(false)}>
+          <ListItemIcon>
+            <StoreIcon />
+          </ListItemIcon>
+          <ListItemText primary={<Typography sx={{color:'#333'}}>Produtos</Typography>} />
+        </ListItem>
+
+        <Divider />
+
+        {/* <ListItem button component={Link} to="/estoque" onClick={() => setMobileOpen(false)}>
+          <ListItemIcon>
+            <InventoryIcon />
+          </ListItemIcon>
+          <ListItemText primary={<Typography sx={{color:'#333'}}>Estoque</Typography>} />
+        </ListItem> */}
+
+        <Divider />
+
+        <ListItem button onClick={handleOpenDashboard}>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+          {openDashboard ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <Collapse in={openDashboard} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button sx={{ pl: 4 }} component={Link} to="/dashboard/visao" onClick={() => setMobileOpen(false)}>
+              <ListItemText primary={<Typography sx={{color:'#333'}}>Visao Geral</Typography>} />
+            </ListItem>
+            <ListItem button sx={{ pl: 4 }} component={Link} to="/dashboard/relatorios" onClick={() => setMobileOpen(false)}>
+              <ListItemText primary={<Typography sx={{color:'#333'}}>Relatorios</Typography>} />
+            </ListItem>
+          </List>
+        </Collapse>
+
+        <Divider />
+
+        <ListItem button component={Link} to="Vendas" onClick={() => setMobileOpen(false)}>
+          <ListItemIcon>
+            <PointOfSaleIcon />
+          </ListItemIcon>
+          <ListItemText primary={<Typography sx={{color:'#333'}}>Vendas</Typography>} />
+        </ListItem>
+
+        <Divider />
+
+        <ListItem button component={Link} to="historico" onClick={() => setMobileOpen(false)}>
+          <ListItemIcon>
+            <HistoryToggleOffIcon />
+          </ListItemIcon>
+          <ListItemText primary={<Typography sx={{color:'#333'}}>Historico</Typography>} />
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      <AppBar position="fixed" sx={{ zIndex: 1300 }}>
+      {/* AppBar com botão de menu no mobile */}
+      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 }}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            Sistema de Produtos
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Typography button component={Link} to="Produtos" variant="h6" noWrap sx={{color:'#fff', textDecoration: 'none'}}>
+            Gestão de Estoque
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          [`& .MuiDrawer-paper`]: {
+      {/* Drawer (Sidebar) */}
+      <Box component="nav">
+        <Drawer
+          variant={isMobile ? "temporary" : "permanent"}
+          open={isMobile ? mobileOpen : true}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, 
+          }}
+          sx={{
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-      >
-        <Toolbar />
-
-        <List>
-          <ListItem button component={Link} to="/produtos">
-            <ListItemIcon>
-              <StoreIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography sx={{ color: "#333" }}>Produtos</Typography>}
-            />
-          </ListItem>
-
-          <Divider sx={{ opacity: 0.8 }} />
-
-          <ListItem button component={Link} to="/estoque">
-            <ListItemIcon>
-              <InventoryIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography sx={{ color: "#333" }}>Estoque</Typography>}
-            />
-          </ListItem>
-
-          <Divider sx={{ opacity: 0.8 }} />
-
-          <ListItem button onClick={handleopenDashboard}>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography sx={{ color: "#333" }}>Dashboard</Typography>
-              }
-            />
-            {openDashboard ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-
-          <Collapse in={openDashboard} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem
-                button
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/dashboard/visao"
-              >
-                <ListItemText primary={<Typography sx={{ color: "#333" }}>Visao Geral</Typography>} />
-              </ListItem>
-              <ListItem
-                button
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/dashboard/relatorios"
-              >
-                <ListItemText primary={<Typography sx={{ color: "#333" }}>Relatórios</Typography>} />
-              </ListItem>
-            </List>
-          </Collapse>
-
-          <Divider sx={{ opacity: 0.8 }} />
-
-          <ListItem button component={Link} to="#">
-            <ListItemIcon>
-              <PointOfSaleIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={<Typography sx={{ color: "#333" }}>Vendas</Typography>}
-            />
-          </ListItem>
-
-          <Divider sx={{ opacity: 0.8 }} />
-
-          <ListItem button component={Link} to="historico">
-            <ListItemIcon>
-              <HistoryToggleOffIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography sx={{ color: "#333" }}>Historico</Typography>
-              }
-            />
-          </ListItem>
-        </List>
-      </Drawer>
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      </Box>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar /> {/* espaço para o AppBar */}
+        <Toolbar /> 
         <Outlet />
       </Box>
     </Box>

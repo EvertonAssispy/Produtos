@@ -1,4 +1,4 @@
-import Indicadores from '../components/dashboard/Indicadores'
+
 import { getHistorico } from '../services/produtoServices'
 import { useEffect, useState, useContext } from "react";
 
@@ -7,7 +7,7 @@ import { useEffect, useState, useContext } from "react";
 function Relatorio() {
 
   return ( 
-    <>sei nao</>
+    <h1>Sem relatorios no momento</h1>
   );
 }
 

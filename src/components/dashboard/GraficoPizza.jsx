@@ -42,7 +42,7 @@ export default function GraficoPizza({Porcentagem, metrics}) {
    
     
 
-    const COLORS = ["#1976d2", "#9c27b0", "#ff9800", "#4caf50"];
+    const COLORS = ["#1976d2", "#9c27b0", "#ff9800", "#4caf50", '#4caf20', "#9c2745", "#197690"];
 
 
     const date = new Date(metrics.ultima_venda).toLocaleDateString('pt-BR')

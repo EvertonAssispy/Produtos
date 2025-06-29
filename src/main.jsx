@@ -9,6 +9,7 @@ import Layout from './Layout'
 import Dashboard from './Pages/Dashboard-visao'
 import Relatorio from './Pages/dashboard-relatorios'
 import Historico from './Pages/Historico'
+import Vendas from './Pages/Vendas'
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       {
         path: 'produtos',
         element: <Produtos />
-      },                         //  Rotas filhos que representam a renderizacao dentro do pai LAYOUT
+      },                     
       {   
         path: 'estoque',
         element: <Estoque />
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: 'historico',
         element: <Historico/>
+      },
+      {
+        path: 'Vendas',
+        element:<Vendas/>
       }
     ]
   }
