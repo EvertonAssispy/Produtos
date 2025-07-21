@@ -7,7 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import StoreIcon from "@mui/icons-material/Store";
-import '../css/download.css';
+import Button from "@mui/material/Button";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import "../css/download.css";
 import {
   deletehistorico,
   getHistoricovendas,
@@ -15,7 +17,6 @@ import {
 import PaginationRounded from "../inputs/Pagination";
 import { useState } from "react";
 import ViewsPdf from "../Downloads.jsdx/View";
-
 
 function confirmarEDeletar() {
   const confirmado = window.confirm(
@@ -29,11 +30,15 @@ function confirmarEDeletar() {
   }
 }
 
-export default function AccessibleTable({ vendas, count, handlepages }) {
+export default function AccessibleTable({
+  Historico,
+  vendas,
+  count,
+  handlepages,
+}) {
   function createData(name, qnt, price, valoruni, data, hora) {
     return { name, qnt, price, valoruni, data, hora };
   }
-
 
   const rows = Array.isArray(vendas)
     ? vendas.map((item) => {
@@ -42,8 +47,8 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
         );
 
         const horaformatada = new Date(item.Venda_em).toLocaleTimeString(
-        "pt-BR"
-        )
+          "pt-BR"
+        );
         return createData(
           item.produto_Vendido,
           item.Quantidade,
@@ -54,14 +59,9 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
         );
       })
     : []; // OU
-   
 
   return (
-    
     <div className="containers">
-
-      
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
           <caption>
@@ -113,14 +113,21 @@ export default function AccessibleTable({ vendas, count, handlepages }) {
               </TableRow>
             ))}
           </TableBody>
-        </Table>  
-  
+        </Table>
+
         <PaginationRounded Count={count} handlePageChange={handlepages} />
       </TableContainer>
-      
+
       <div className="download">
-        <button onClick={()=>ViewsPdf(vendas)}>download aqui</button>
+        <Button
+          className="botao"
+          onClick={() => ViewsPdf(Historico)}
+          variant="outlined"
+          startIcon={<FileDownloadIcon />}
+        >
+          Download aqui
+        </Button>
       </div>
-</div>
+    </div>
   );
 }

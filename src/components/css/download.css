@@ -7,3 +7,8 @@
     align-items: end;
 
 }
+
+.download button{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

@@ -1,6 +1,7 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 
+
 function ViewsPdf(vendas) {
     
     pdfMake.vfs = pdfFonts.vfs

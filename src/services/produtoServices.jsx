@@ -90,6 +90,13 @@ export async function getHistoricovendas(offset) {
   return response.data;
 }
 
+export async function getHistoricoCompleto(){
+
+  const response = await axios.get(`${baseURl}/produtos/v1/vendas/infosgeral/`)
+  return response.data
+}
+
+
 // DELETE HISTORICO DE VENDAS
 
 export async function deletehistorico() {

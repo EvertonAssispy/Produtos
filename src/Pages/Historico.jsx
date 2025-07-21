@@ -1,5 +1,5 @@
 import Tabela from "../components/Historico-components/Tabela";
-import { getHistorico, getHistoricovendas } from "../services/produtoServices";
+import { getHistorico, getHistoricoCompleto, getHistoricovendas } from "../services/produtoServices";
 import { useEffect, useState, useContext } from "react";
 
 function Historico() {
@@ -7,11 +7,18 @@ function Historico() {
   const [pages, setpages] = useState(1);
   const [offset, setoffset] = useState(0);
   const [Vendas, setVendas] = useState([]);
+  const [Historico, setHistorico] = useState([]);
+
 
   useEffect(() => {
     getHistoricovendas(offset)
       .then((data) => setVendas(data))
       .catch((error) => console.error(error));
+
+    getHistoricoCompleto()
+      .then((data) => setHistorico(data))
+      .catch((error) => console.error(error));
+    
   }, [offset]);
 
   const handlepages = (event, value) => {
@@ -23,9 +30,10 @@ function Historico() {
   };
 
   const TotalPages = Math.ceil(Vendas.count / 12);
-
+  console.log(Historico)
   return (
     <Tabela
+      Historico={Historico.items}
       vendas={Vendas.items}
       handlepages={handlepages}
       count={TotalPages}
