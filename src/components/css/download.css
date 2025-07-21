@@ -1,0 +1,9 @@
+
+.download{
+    display: flex;
+    padding-top: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: end;
+
+}

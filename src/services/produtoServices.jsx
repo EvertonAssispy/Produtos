@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const baseURl = 'https://backprodutos-production.up.railway.app'
+
 // PRODUTOS
 
 export async function GetProducts(pages) {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/produtos/?page=${pages}&page_size=5`
+    `${baseURl}/produtos/v1/produtos/?page=${pages}&page_size=5`
   );
 
   return response.data;
@@ -12,7 +14,7 @@ export async function GetProducts(pages) {
 
 export async function GetProductss() {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/produtos/`
+    `${baseURl}/produtos/v1/produtos/`
   );
 
   return response.data;
@@ -20,7 +22,7 @@ export async function GetProductss() {
 
 export async function PostProduts(nome, preco, qnt, id) {
   const response = await axios.post(
-    `http://127.0.0.1:8080/produtos/v1/produtos/`,
+    `${baseURl}/produtos/v1/produtos/`,
     {
       Nome_Produto: `${nome}`,
       Preco_Produto: preco,
@@ -37,7 +39,7 @@ export async function PostProduts(nome, preco, qnt, id) {
 
 export async function DeleteProducts(id) {
   const response = await axios.delete(
-    `http://127.0.0.1:8080/produtos/v1/produtos/delete/${id}`
+    `${baseURl}/produtos/v1/produtos/delete/${id}`
   );
 
   return response.data;
@@ -47,14 +49,14 @@ export async function DeleteProducts(id) {
 
 export async function GetCategories() {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/produtos/categoria/`
+    `${baseURl}/produtos/v1/produtos/categoria/`
   );
   return response.data;
 }
 
 export async function PostCategoria(Categoria) {
   const response = await axios.post(
-    `http://127.0.0.1:8080/produtos/v1/produtos/categoria/`,
+    `${baseURl}/produtos/v1/produtos/categoria/`,
 
     {
       Categoria: `${Categoria}`,
@@ -66,7 +68,7 @@ export async function PostCategoria(Categoria) {
 
 export async function Venda(id, quantidade) {
   const response = await axios.post(
-    `http://127.0.0.1:8080/produtos/v1/vendas/${id}`,
+    `${baseURl}/produtos/v1/vendas/${id}`,
     {
     
       "Quantidade": quantidade,
@@ -76,14 +78,14 @@ export async function Venda(id, quantidade) {
 
 export async function getHistorico() {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/vendas/infos/`
+    `${baseURl}/produtos/v1/vendas/infos/`
   );
   return response.data;
 }
 
 export async function getHistoricovendas(offset) {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/vendas/infosgeral/?limit=12&offset=${offset}`
+    `${baseURl}/produtos/v1/vendas/infosgeral/?limit=12&offset=${offset}`
   );
   return response.data;
 }
@@ -92,7 +94,7 @@ export async function getHistoricovendas(offset) {
 
 export async function deletehistorico() {
   const response = await axios.delete(
-    "http://127.0.0.1:8080/produtos/v1/vendas/infos/delete/"
+    `${baseURl}/produtos/v1/vendas/infos/delete/`
   );
 }
 
@@ -100,7 +102,7 @@ export async function deletehistorico() {
 
 export async function filter(params) {
   const response = await axios.get(
-    `http://127.0.0.1:8080/produtos/v1/vendas/filter/infos/`
+    `${baseURl}/produtos/v1/vendas/filter/infos/`
   );
   return response.data;
 }
