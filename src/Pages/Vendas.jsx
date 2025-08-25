@@ -15,7 +15,6 @@ export default function Vendas() {
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [quantidade, setQuantidade] = useState(1);
 
-  // Buscar produtos da API enquanto o usuário digita
   useEffect(() => {
     GetProductss()
     .then((data)=>{

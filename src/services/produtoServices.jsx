@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseURl = 'https://backprodutos-production.up.railway.app'
-
+//const baseURl = 'https://backprodutos-production.up.railway.app'
+const baseURl = 'http://127.0.0.1:8080'
 // PRODUTOS
 
 export async function GetProducts(pages) {
@@ -107,9 +107,10 @@ export async function deletehistorico() {
 
 // FILTRO
 
-export async function filter(params) {
+export async function getfilter(params) {
   const response = await axios.get(
-    `${baseURl}/produtos/v1/vendas/filter/infos/`
+    `${baseURl}/produtos/v1/vendas/filter/infos/${params}`
   );
   return response.data;
+
 }

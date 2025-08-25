@@ -1,5 +1,5 @@
-import Input from "../components/inputs/Input";
-import CollapsibleTable from "../components/Tableproducts";
+import Input from "../components/produtos/Input";
+import CollapsibleTable from "../components/produtos/Tableproducts";
 import { useEffect, useState, useContext } from "react";
 import {
   DeleteProducts,
@@ -25,36 +25,26 @@ function Produtos() {
   const [qntproduto, setqntProduto] = useState();
   const [Count, setCount] = useState([]);
 
-
   useEffect(() => {
-
     GetProducts(Page)
       .then((data) => {
         setProdutos(data.items);
-        return data
+        return data;
       })
       .then((data) => setCount(data.count))
       .catch((erro) => console.error(erro));
-
   }, [enviando, Page]);
 
   useEffect(() => {
-
     GetCategories()
       .then((data) => setCategoria(data))
       .catch((erro) => console.error(erro));
-
-  }, [enviando])
-
-
+  }, [enviando]);
 
   const pageChange = (event, value) => {
     setPage(value);
     GetProducts(value);
   };
-
-
-
 
   const enviar = async () => {
     if (
@@ -89,35 +79,24 @@ function Produtos() {
     }
   };
 
-
-
-
-
-
-
   return (
     <div className="page-wrapper">
       <div className="container">
-        <ProdutosContext.Provider value={{ setEnviando, enviar, seterro, erro, Categoria }}>
+        <ProdutosContext.Provider
+          value={{ setEnviando, enviar, seterro, erro, Categoria }}
+        >
           <Input
-
             setcategoriaselecionada={setcategoriaselecionada}
             setnomeProduto={setnomeProduto}
             setprecoProduto={setprecoProduto}
             setqntProduto={setqntProduto}
           />
-          {(Count === 0) ?
-
+          {Count === 0 ? (
             <div className="semprodutos">
               <h1>Nao há produtos</h1>
               <h1>cadastrados no momento.</h1>
-
-
-            </div> :
-
-
-
-
+            </div>
+          ) : (
             <div className="table">
               <CollapsibleTable
                 produtos={Produtos}
@@ -125,9 +104,8 @@ function Produtos() {
                 pageChange={pageChange}
               />
             </div>
-          }
+          )}
         </ProdutosContext.Provider>
-        
       </div>
     </div>
   );

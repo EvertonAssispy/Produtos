@@ -47,7 +47,7 @@ export default function SidebarLayout() {
     <div>
       <Toolbar />
       <List>
-        <ListItem button component={Link} to="/produtos" onClick={() => setMobileOpen(false)}>
+        <ListItem button component={Link} to="/" onClick={() => setMobileOpen(false)}>
           <ListItemIcon>
             <StoreIcon />
           </ListItemIcon>

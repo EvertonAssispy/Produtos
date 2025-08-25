@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './css/index.css'
 import Produtos from './Pages/Produtos'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Estoque from './components/Estoque-components/Estoque'
+
 import Layout from './Layout'
 import Dashboard from './Pages/Dashboard-visao'
 import Relatorio from './Pages/dashboard-relatorios'
@@ -18,13 +18,9 @@ const router = createBrowserRouter([
     element: <Layout />,         // Estrutura base do projeto
     children: [
       {
-        path: 'produtos',
+        path: '',
         element: <Produtos />
       },                     
-      {   
-        path: 'estoque',
-        element: <Estoque />
-      },
       {
         path:'dashboard/visao',
         element:<Dashboard/>
