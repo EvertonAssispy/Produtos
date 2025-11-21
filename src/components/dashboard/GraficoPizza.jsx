@@ -5,20 +5,9 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 
 
 export default function GraficoPizza({Porcentagem, metrics}) {
+  console.log(Porcentagem)
 
-
-  if (!Porcentagem || Porcentagem.length === 0) {
-    return (
-      <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Distribuição de Produtos
-          </Typography>
-          <Typography variant="body2">Nenhum dado para exibir.</Typography>
-        </CardContent>
-      </Card>
-    );
-  }if (!Porcentagem || Porcentagem.length === 0) {
+  if (!metrics || metrics.length === 0) {
     return (
       <Card sx={{ maxWidth: 500, mx: "auto", mt: 4 }}>
         <CardContent>

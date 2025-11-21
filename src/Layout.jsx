@@ -43,25 +43,17 @@ export default function SidebarLayout() {
     setOpenDashboard(!openDashboard);
   };
 
-  const drawerContent = (
-    <div>
+const drawerContent = (
+  <Box display="flex" flexDirection="column" height="100vh">
+    <Box>
       <Toolbar />
       <List>
         <ListItem button component={Link} to="/" onClick={() => setMobileOpen(false)}>
           <ListItemIcon>
             <StoreIcon />
           </ListItemIcon>
-          <ListItemText primary={<Typography sx={{color:'#333'}}>Produtos</Typography>} />
+          <ListItemText primary={<Typography sx={{ color: '#333' }}>Produtos</Typography>} />
         </ListItem>
-
-        <Divider />
-
-        {/* <ListItem button component={Link} to="/estoque" onClick={() => setMobileOpen(false)}>
-          <ListItemIcon>
-            <InventoryIcon />
-          </ListItemIcon>
-          <ListItemText primary={<Typography sx={{color:'#333'}}>Estoque</Typography>} />
-        </ListItem> */}
 
         <Divider />
 
@@ -76,21 +68,21 @@ export default function SidebarLayout() {
         <Collapse in={openDashboard} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItem button sx={{ pl: 4 }} component={Link} to="/dashboard/visao" onClick={() => setMobileOpen(false)}>
-              <ListItemText primary={<Typography sx={{color:'#333'}}>Visao Geral</Typography>} />
+              <ListItemText primary={<Typography sx={{ color: '#333' }}>Visao Geral</Typography>} />
             </ListItem>
             <ListItem button sx={{ pl: 4 }} component={Link} to="/dashboard/relatorios" onClick={() => setMobileOpen(false)}>
-              <ListItemText primary={<Typography sx={{color:'#333'}}>Relatorios</Typography>} />
+              <ListItemText primary={<Typography sx={{ color: '#333' }}>Relatorios</Typography>} />
             </ListItem>
           </List>
         </Collapse>
 
         <Divider />
 
-        <ListItem button component={Link} to="Vendas" onClick={() => setMobileOpen(false)}>
+        <ListItem button component={Link} to="vendas" onClick={() => setMobileOpen(false)}>
           <ListItemIcon>
             <PointOfSaleIcon />
           </ListItemIcon>
-          <ListItemText primary={<Typography sx={{color:'#333'}}>Vendas</Typography>} />
+          <ListItemText primary={<Typography sx={{ color: '#333' }}>Vendas</Typography>} />
         </ListItem>
 
         <Divider />
@@ -99,11 +91,23 @@ export default function SidebarLayout() {
           <ListItemIcon>
             <HistoryToggleOffIcon />
           </ListItemIcon>
-          <ListItemText primary={<Typography sx={{color:'#333'}}>Historico</Typography>} />
+          <ListItemText primary={<Typography sx={{ color: '#333' }}>Historico</Typography>} />
         </ListItem>
       </List>
-    </div>
-  );
+    </Box>
+
+    {/* LOGOUT */}
+    <Box mt="auto">
+      <Divider />
+      <ListItem button component={Link} to="#" onClick={() => setMobileOpen(false)}>
+        <ListItemIcon>
+          <HistoryToggleOffIcon />
+        </ListItemIcon>
+        <ListItemText primary={<Typography sx={{ color: '#333' }}>Logout</Typography>} />
+      </ListItem>
+    </Box>
+  </Box>
+);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -123,7 +127,7 @@ export default function SidebarLayout() {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography button component={Link} to="Produtos" variant="h6" noWrap sx={{color:'#fff', textDecoration: 'none'}}>
+          <Typography button component={Link} to="/" variant="h6" noWrap sx={{color:'#fff', textDecoration: 'none'}}>
             Gestão de Estoque
           </Typography>
         </Toolbar>
